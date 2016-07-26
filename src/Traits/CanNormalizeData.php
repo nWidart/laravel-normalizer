@@ -11,7 +11,7 @@ trait CanNormalizeData
     public function normalize(array $data)
     {
         foreach ($this->getNormalizers() as $normalizer) {
-            $data = app($normalizer)->normalize($data);
+            $data = (new $normalizer)->normalize($data);
         }
 
         return $data;
