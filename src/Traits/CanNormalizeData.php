@@ -5,19 +5,13 @@ namespace Nwidart\LaravelNormalizer\Traits;
 trait CanNormalizeData
 {
     /**
-     * Array of data normalizers
-     * @var array
-     */
-    protected $normalizers = [];
-
-    /**
      * @param array $data
      * @return array
      */
     public function normalize(array $data)
     {
         foreach ($this->getNormalizers() as $normalizer) {
-            $data = $normalizer->normalize($data);
+            $data = app($normalizer)->normalize($data);
         }
 
         return $data;
@@ -26,7 +20,7 @@ trait CanNormalizeData
     /**
      * @return array
      */
-    private function getNormalizers()
+    public function getNormalizers()
     {
         return $this->normalizers;
     }
