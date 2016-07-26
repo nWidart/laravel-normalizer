@@ -66,7 +66,7 @@ use Nwidart\LaravelNormalizer\Traits\CanNormalizeData;
 class Product extends Model
 {
     use CanNormalizeData;
-    protected $normalizers = [ProductNormalizer::class];
+    protected $normalizers = [CustomNormalizer::class];
 }
 ```
 
