@@ -22,6 +22,6 @@ trait CanNormalizeData
      */
     public function getNormalizers()
     {
-        return $this->normalizers;
+        return $this->normalizers ?: [];
     }
 }
