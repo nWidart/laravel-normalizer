@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "nwidart\\laravel-normalizer\\": "src"
+            "Nwidart\\LaravelNormalizer\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "nwidart\\laravel-normalizer\\": "tests"
+            "Nwidart\\LaravelNormalizer\\": "tests"
         }
     },
     "scripts": {
