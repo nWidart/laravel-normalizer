@@ -8,7 +8,7 @@ trait CanNormalizeData
      * @param array $data
      * @return array
      */
-    public function normalize(array $data)
+    public function normalize(array $data) : array
     {
         foreach ($this->getNormalizers() as $normalizer) {
             $data = (new $normalizer)->normalize($data);
@@ -20,7 +20,7 @@ trait CanNormalizeData
     /**
      * @return array
      */
-    public function getNormalizers()
+    public function getNormalizers() : array
     {
         return $this->normalizers ?: [];
     }

@@ -9,5 +9,5 @@ interface Normalizer
      * @param array $data
      * @return array
      */
-    public function normalize(array $data);
+    public function normalize(array $data) : array;
 }

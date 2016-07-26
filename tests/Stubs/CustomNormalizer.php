@@ -11,7 +11,7 @@ final class CustomNormalizer implements Normalizer
      * @param array $data
      * @return array
      */
-    public function normalize(array $data)
+    public function normalize(array $data) : array
     {
         if (array_key_exists('name', $data)) {
             $data['name'] = strtoupper($data['name']);
