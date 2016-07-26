@@ -8,7 +8,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/nWidart/laravel-normalizer.svg?style=flat-square)](https://scrutinizer-ci.com/g/nWidart/laravel-normalizer)
 [![Total Downloads](https://img.shields.io/packagist/dt/nwidart/laravel-normalizer.svg?style=flat-square)](https://packagist.org/packages/nwidart/laravel-normalizer)
 
-
+This package helps you normalize your data in order to save them into the database. The Goal is to having separate classes that handle the data normalization, and thus can be tested independently.
 
 ## Install
 
@@ -20,9 +20,69 @@ $ composer require nwidart/laravel-normalizer
 
 ## Usage
 
+### 1. Adding trait
+
+Add the `Nwidart\LaravelNormalizer\Traits\CanNormalizeData` trait on the model(s) you wish data to be normalized.
+
+### 2. Create Normalizer classes
+
+Your normalizers classes need to implement the `Nwidart\LaravelNormalizer\Contracts\Normalizer` interface. This interface will add the `normalize(array $data)` method.
+
+Example:
+
 ``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
+use Nwidart\LaravelNormalizer\Contracts\Normalizer;
+
+final class CustomNormalizer implements Normalizer
+{
+    /**
+     * Normalize the given data
+     * @param array $data
+     * @return array
+     */
+    public function normalize(array $data)
+    {
+        if (array_key_exists('name', $data)) {
+            $data['name'] = strtoupper($data['name']);
+        }
+
+        return $data;
+    }
+}
+```
+
+This method needs to return the `$data` array. In here you can change the received data as you please.
+
+### 3. Add `normalizers` class property
+
+On that same model, add a `protected $normalizers` property. This is where you list your normalizers, in an array.
+
+Example:
+
+``` php
+use Illuminate\Database\Eloquent\Model;
+use Nwidart\LaravelNormalizer\Traits\CanNormalizeData;
+
+class Product extends Model
+{
+    use CanNormalizeData;
+    protected $normalizers = [ProductNormalizer::class];
+}
+```
+
+### 4. Normalize your data on save/update
+
+Now you can start normalizing your data. This can for instance be done in your repository class.
+
+Example:
+
+``` php
+public function create($data)
+{
+    $data = $this->model->normalize($data);
+
+    return $this->model->create($data);
+}
 ```
 
 ## Change log
