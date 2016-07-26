@@ -11,9 +11,10 @@ class CanNormalizeDataTraitTest extends \PHPUnit_Framework_TestCase
     /** @test */
     public function it_returns_empty_array_if_no_normalizers_are_found()
     {
-        $model = new class extends Model {
-            use CanNormalizeData;
-        };
+        $model = new class extends Model
+ {
+     use CanNormalizeData;
+ };
 
         $this->assertEquals([], $model->getNormalizers());
     }
@@ -38,9 +39,10 @@ class CanNormalizeDataTraitTest extends \PHPUnit_Framework_TestCase
 
     private function getStubbedModel()
     {
-        return new class extends Model {
-            use CanNormalizeData;
-            protected $normalizers = [CustomNormalizer::class];
-        };
+        return new class extends Model
+ {
+     use CanNormalizeData;
+     protected $normalizers = [CustomNormalizer::class];
+ };
     }
 }
