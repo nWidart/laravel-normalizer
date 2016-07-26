@@ -1,5 +1,5 @@
 filter:
-    excluded_paths: [tests/*]
+    excluded_paths: [tests/*, vendor/*]
 
 checks:
     php:
@@ -18,6 +18,5 @@ checks:
         fix_doc_comments: true
 
 tools:
-    external_code_coverage:
-        timeout: 600
-        runs: 3
+    external_code_coverage: true
+    php_code_coverage: true
