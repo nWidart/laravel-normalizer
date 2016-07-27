@@ -4,6 +4,8 @@ All Notable changes to `laravel-normalizer` will be documented in this file.
 
 ## Next -
 
+## 0.2 - 2016-27-02
+
 ### Changed
 
 - Using php 7 scalar type hints
